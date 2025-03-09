@@ -2,7 +2,7 @@ from functions import get_todos, write_todos #importing functions from functions
 
 import time
 now = time.strftime("%b %d, %Y   %H:%M:%S")
-print(now)
+print("It is", now)
 
 prompt = "Type add, show, edit, remove, or exit list: "
 
