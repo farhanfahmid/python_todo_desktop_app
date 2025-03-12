@@ -6,6 +6,11 @@ import FreeSimpleGUI as sg
 
 import time
 
+# sg.theme_previewer()
+
+sg.theme('BlueMono')
+sg.theme_text_color('Dark Blue')
+
 #define label for live clock
 clock = sg.Text('', key='clock')
 
@@ -17,21 +22,21 @@ label = sg.Text("What To Do Today?")
 input_box = sg.InputText(key="todo")
 
 #define buttons
-add_button = sg.Button("Add")
+add_button = sg.Button(size=15, image_source='images/004 add.png', mouseover_colors='Dark Blue', tooltip="Add Todo", key="Add")
 edit_button = sg.Button("Edit")
-remove_button = sg.Button("Remove")
+remove_button = sg.Button(key="Remove", image_source='images/004 complete.png', mouseover_colors='Green', tooltip='Complete Task')
 exit_button = sg.Button("Exit")
 
 #define a list box that gets the added todo items and lists them
 list_box = sg.Listbox(values = functions.get_todos(), key='todo_item',
-                      enable_events=True, size=[45, 10])
+                      enable_events=True, size=[45, 5])
 
 #create a window with the defined elements
-window = sg.Window('My To-Do App',
+window = sg.Window('To-Do App',
                    layout=[ [clock],
                             [label],
-                           [input_box, add_button],
-                           [list_box, edit_button, remove_button],
+                           [input_box, add_button, remove_button],
+                           [list_box, edit_button],
                            [exit_button]],
 
                    font=('Helvetica', 16))
@@ -81,8 +86,9 @@ while True:
             except IndexError:
                 sg.popup("Please select an item to remove", font=('Helvetica', 14), title="Oops!")
 
-        case sg.WINDOW_CLOSED: break
-
         case 'Exit': break
+
+        case sg.WINDOW_CLOSED:
+            break
 
 window.close()
