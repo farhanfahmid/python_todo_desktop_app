@@ -3,11 +3,17 @@ from contextlib import nullcontext
 import functions
 
 import FreeSimpleGUI as sg
-import time
-now = time.strftime("%b %d, %Y   %H:%M:%S")
-label = sg.Text("What To Do Today?")
-date = sg.Text(now)
 
+import time
+
+#define label for live clock
+clock = sg.Text('', key='clock')
+
+
+#define the initial prompt
+label = sg.Text("What To Do Today?")
+
+#define input box
 input_box = sg.InputText(key="todo")
 
 #define buttons
@@ -22,7 +28,7 @@ list_box = sg.Listbox(values = functions.get_todos(), key='todo_item',
 
 #create a window with the defined elements
 window = sg.Window('My To-Do App',
-                   layout=[[date],
+                   layout=[ [clock],
                             [label],
                            [input_box, add_button],
                            [list_box, edit_button, remove_button],
@@ -31,9 +37,10 @@ window = sg.Window('My To-Do App',
                    font=('Helvetica', 16))
 
 while True:
-    event, values = window.read() #displays the window
-    print("event: ", event)
-    print("values: ", values)
+    event, values = window.read(timeout=500) #displays the window
+    window['clock'].update(value=time.strftime("%b %d, %Y   %H:%M:%S")) #display the clock
+    # print("event: ", event)
+    # print("values: ", values)
 
     match event:
         case 'Add':
@@ -57,7 +64,7 @@ while True:
                 window['todo'].update(value='')
 
             except IndexError:
-                sg.popup("Please select an item first to edit")
+                sg.popup("Please select an item first to edit", font=('Helvetica', 14), title="Oops!")
 
         case 'todo_item':
             window['todo'].update(value = values['todo_item'][0]) #when clicking on a todo item, make the input box's todo text into that clicked to_do item
@@ -72,9 +79,10 @@ while True:
                 window['todo_item'].update(values=todos)
                 window['todo'].update(value='')
             except IndexError:
-                sg.popup("Please select an item to remove")
+                sg.popup("Please select an item to remove", font=('Helvetica', 14), title="Oops!")
 
         case sg.WINDOW_CLOSED: break
+
         case 'Exit': break
 
 window.close()
