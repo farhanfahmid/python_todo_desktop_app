@@ -1,8 +1,7 @@
-from contextlib import nullcontext
 import functions
 import FreeSimpleGUI as sg
 import time
-import sys
+
 import os
 
 
