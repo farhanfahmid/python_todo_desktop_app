@@ -12,6 +12,8 @@ def write_todos(todos_arg, filepath='todos_file.txt'):
         file_local.writelines(todos_arg)
 
 
+
+
 # # Function to get the correct file path for images
 # def resource_path(relative_path):
 #     """ Get absolute path to resource, works for dev and PyInstaller .exe """

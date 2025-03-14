@@ -4,8 +4,6 @@ import time
 
 import os
 
-
-
 # Ensure todos file exists
 if not os.path.exists("todos_file.txt"):
     with open("todos_file.txt", 'w') as file:
@@ -28,7 +26,7 @@ add_button = sg.Button("Add")
 edit_button = sg.Button("Edit")
 remove_button = sg.Button(
     key="Remove",
-    image_source="G:\PYTHON PROJECTS\Python To-Do List App\images\complete.png",
+    image_source=r"G:\PYTHON PROJECTS\Python To-Do List App\images\complete.png",
     mouseover_colors='Green',
     tooltip='Complete Task'
 )
