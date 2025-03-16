@@ -37,7 +37,7 @@ list_box = sg.Listbox(
 
 # Create a window with the defined elements
 window = sg.Window(
-    'To-Do App',
+    'What To Do',
     layout=[
         [clock],
         [label],
