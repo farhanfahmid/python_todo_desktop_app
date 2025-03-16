@@ -24,12 +24,7 @@ input_box = sg.InputText(key="todo")
 # Define buttons
 add_button = sg.Button("Add")
 edit_button = sg.Button("Edit")
-remove_button = sg.Button(
-    key="Remove",
-    image_source=r"G:\PYTHON PROJECTS\Python To-Do List App\images\complete.png",
-    mouseover_colors='Green',
-    tooltip='Complete Task'
-)
+remove_button = sg.Button("Remove")
 exit_button = sg.Button("Exit")
 
 # Define a list box that gets the added todo items and lists them
@@ -98,7 +93,10 @@ while True:
             except IndexError:
                 sg.popup("Please select an item to remove", font=('Helvetica', 14), title="Oops!")
 
-        case 'Exit' | sg.WINDOW_CLOSED:
+        case 'Exit':
             break
+
+    if event in (sg.WINDOW_CLOSED, None):
+        break
 
 window.close()
